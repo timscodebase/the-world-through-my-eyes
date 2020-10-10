@@ -37,6 +37,7 @@ export const query = graphql`
   query IndexPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
+      subTitle
       description
       keywords
     }
@@ -97,6 +98,7 @@ const IndexPage = props => {
       />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
+        <h2>{site.subTitle}</h2>
         {postNodes && (
           <BlogPostPreviewList
             title='Latest blog posts'
