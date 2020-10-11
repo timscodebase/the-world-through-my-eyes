@@ -24,13 +24,28 @@ async function createBlogPostPages (graphql, actions) {
           }
         }
       }
+      allSanityStory(
+        filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      ) {
+        edges {
+          node {
+            id
+            publishedAt
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `)
 
   if (result.errors) throw result.errors
 
   const postEdges = (result.data.allSanityPost || {}).edges || []
-
+  const storyEdges = (result.data.allSanityStory || {}).edges || []
+  
+  // Build Blog Pages
   postEdges
     .filter(edge => !isFuture(edge.node.publishedAt))
     .forEach((edge, index) => {
@@ -41,6 +56,21 @@ async function createBlogPostPages (graphql, actions) {
       createPage({
         path,
         component: require.resolve('./src/templates/blog-post.js'),
+        context: {id}
+      })
+    })
+  
+  // Build Story Pages
+  storyEdges
+    .filter(edge => !isFuture(edge.node.publishedAt))
+    .forEach((edge, index) => {
+      const {id, slug = {}, publishedAt} = edge.node
+      const dateSegment = format(publishedAt, 'YYYY/MM')
+      const path = `/stories/${dateSegment}/${slug.current}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/story.js'),
         context: {id}
       })
     })

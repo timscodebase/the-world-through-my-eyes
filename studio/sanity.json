@@ -1,7 +1,7 @@
 {
   "root": true,
   "project": {
-    "name": "Short Stories"
+    "name": "Short Stories Backend"
   },
   "api": {
     "projectId": "obcamsw6",
