@@ -1,19 +1,21 @@
 import {format, distanceInWords, differenceInDays} from 'date-fns'
 import React from 'react'
 import styled from 'styled-components'
-import {usePalette} from 'react-palette'
 
-import {buildImageObj, buildImageUrl} from '../lib/helpers'
+import {buildImageObj, getColorsFromMainImage} from '../lib/helpers'
 import {imageUrlFor} from '../lib/image-url'
 import PortableText from './portableText'
 import Container from './container'
 import AuthorList from './author-list'
 
 const Article = styled.article`
+  color: ${props => props.colors.foregroundColor};
+  background: ${props => props.colors.backgroundColor};
+  
   .mainImage {
     display: block;
     position: relative;
-    background: var(--color-very-light-gray);
+    background: ${props => props.colors.backgroundColor};
     padding-bottom: calc(9 / 16 * 100%);
 
     img {
@@ -92,10 +94,11 @@ const Article = styled.article`
   }
 `
 
-export default function Story ({_rawBody, authors, categories, title, mainImage, publishedAt}) {
-  console.log(usePalette("http://localhost:8000/img.jpg"))
+export default function Story ({_rawBody, authors, categories, title, slug, mainImage, publishedAt}) {
+  const url = typeof window !== 'undefined' ? window.location.origin : ''
+  const colorsFromMainImage = getColorsFromMainImage(slug.current, url)
   return (
-    <Article>
+    <Article colors={colorsFromMainImage}>
       {mainImage && mainImage.asset && (
         <div className='mainImage'>
           <img
