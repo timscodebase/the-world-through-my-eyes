@@ -16,5 +16,9 @@
   "devDependencies": {
     "@sanity/cli": "^2.0.0",
     "lerna": "^3.13.1"
+  },
+  "dependencies": {
+    "react-palette": "^1.0.2",
+    "styled-components": "^5.2.0"
   }
 }

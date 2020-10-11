@@ -6,6 +6,7 @@ import {
   filterOutDocsPublishedInTheFuture
 } from '../lib/helpers'
 import BlogPostPreviewList from '../components/blog-post-preview-list'
+import StoryPreviewList from '../components/story-preview-list'
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
@@ -61,6 +62,27 @@ export const query = graphql`
           }
         }
       }
+    },
+    stories: allSanityStory(
+      limit: 6
+      sort: { fields: [publishedAt], order: DESC }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+    ) {
+      edges {
+        node {
+          id
+          publishedAt
+          mainImage {
+            ...SanityImage
+            alt
+          }
+          title
+          _rawExcerpt
+          slug {
+            current
+          }
+        }
+      }
     }
   }
 `
@@ -82,6 +104,11 @@ const IndexPage = props => {
       .filter(filterOutDocsWithoutSlugs)
       .filter(filterOutDocsPublishedInTheFuture)
     : []
+  const storyNodes = (data || {}).stories
+    ? mapEdgesToNodes(data.stories)
+      .filter(filterOutDocsWithoutSlugs)
+      .filter(filterOutDocsPublishedInTheFuture)
+    : []
 
   if (!site) {
     throw new Error(
@@ -99,6 +126,13 @@ const IndexPage = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         <h2>{site.subTitle}</h2>
+        {storyNodes && (
+          <StoryPreviewList
+            title='Latest blog stories'
+            nodes={storyNodes}
+            browseMoreHref='/archive/'
+          />
+        )}
         {postNodes && (
           <BlogPostPreviewList
             title='Latest blog posts'
