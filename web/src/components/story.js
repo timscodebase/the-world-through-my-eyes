@@ -112,6 +112,7 @@ export default function Story ({_rawBody, authors, categories, title, slug, main
   const url = typeof window !== 'undefined' ? window.location.origin : ''
   const colorsFromMainImage = getColorsFromMainImage(slug.current, url)
   setColors(colorsFromMainImage.data)
+  // console.log(colors)
 
   return (
     <Article colors={colors}>
