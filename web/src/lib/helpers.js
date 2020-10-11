@@ -2,12 +2,7 @@ import {format, isFuture} from 'date-fns'
 import {usePalette} from 'react-palette'
 
 export function getColorsFromMainImage(slug, url) {
-  const palette = usePalette(`${url}/img/${slug}.jpg`)
-
-  return ({
-      backgroundColor: palette.data.darkMuted,
-      foregroundColor: palette.data.lightMuted
-    })
+  return usePalette(`${url}/img/${slug}.jpg`)
 }
 
 export function cn (...args) {

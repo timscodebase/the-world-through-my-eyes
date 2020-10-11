@@ -3,19 +3,28 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {buildImageObj, getColorsFromMainImage} from '../lib/helpers'
+import ColorContext from '../context/colorContext'
 import {imageUrlFor} from '../lib/image-url'
 import PortableText from './portableText'
 import Container from './container'
 import AuthorList from './author-list'
 
+// colors
+// darkMuted: '#483f2e'
+// darkVibrant: '#214664'
+// lightMuted: '#bbbfc3'
+// lightVibrant: '#a4bcd5'
+// muted: '#a47458'
+// vibrant: '#446c94'
+
 const Article = styled.article`
-  color: ${props => props.colors.foregroundColor};
-  background: ${props => props.colors.backgroundColor};
+  color: ${props => props.colors.lightVibrant};
+  background: ${props => props.colors.darkMuted};
   
   .mainImage {
     display: block;
     position: relative;
-    background: ${props => props.colors.backgroundColor};
+    background: ${props => props.colors.darkMuted};
     padding-bottom: calc(9 / 16 * 100%);
 
     img {
@@ -48,6 +57,10 @@ const Article = styled.article`
           color: inherit;
         }
       }
+    }
+
+    h1 {
+      color: ${props => props.colors.lightMuted};
     }
 
     h2, h3, h4, h5, h6 {
@@ -95,10 +108,13 @@ const Article = styled.article`
 `
 
 export default function Story ({_rawBody, authors, categories, title, slug, mainImage, publishedAt}) {
+  const [colors, setColors] = React.useContext(ColorContext)
   const url = typeof window !== 'undefined' ? window.location.origin : ''
   const colorsFromMainImage = getColorsFromMainImage(slug.current, url)
+  setColors(colorsFromMainImage.data)
+
   return (
-    <Article colors={colorsFromMainImage}>
+    <Article colors={colors}>
       {mainImage && mainImage.asset && (
         <div className='mainImage'>
           <img

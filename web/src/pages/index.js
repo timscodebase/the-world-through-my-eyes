@@ -1,5 +1,6 @@
 import React from 'react'
 import {graphql} from 'gatsby'
+
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
@@ -11,6 +12,7 @@ import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import ColorProvider from '../context/colorContext'
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -123,24 +125,26 @@ const IndexPage = props => {
         description={site.description}
         keywords={site.keywords}
       />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        <h2>{site.subTitle}</h2>
-        {storyNodes && (
-          <StoryPreviewList
-            title='Latest blog stories'
-            nodes={storyNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-        {postNodes && (
-          <BlogPostPreviewList
-            title='Latest blog posts'
-            nodes={postNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-      </Container>
+      <ColorProvider>
+        <Container>
+          <h1 hidden>Welcome to {site.title}</h1>
+          <h2>{site.subTitle}</h2>
+          {storyNodes && (
+            <StoryPreviewList
+              title='Latest blog stories'
+              nodes={storyNodes}
+              browseMoreHref='/archive/'
+            />
+          )}
+          {postNodes && (
+            <BlogPostPreviewList
+              title='Latest blog posts'
+              nodes={postNodes}
+              browseMoreHref='/archive/'
+            />
+          )}
+        </Container>
+      </ColorProvider>
     </Layout>
   )
 }
