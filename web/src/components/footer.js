@@ -34,9 +34,8 @@ const StyledFooter = styled.footer`
 `
 
 export default function Footer({colors}) {
-  console.log(colors);
   return (
-    <StyledFooter colors={colors.data}>
+    <StyledFooter colors={colors}>
       <div className="footerWrapper">
         <div className="siteInfo">
           &copy; {new Date().getFullYear()}, Built with <a href='https://www.sanity.io'>Sanity</a>{' '}

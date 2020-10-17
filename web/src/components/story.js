@@ -1,15 +1,15 @@
+import React, {useEffect} from 'react'
 import {format, distanceInWords, differenceInDays} from 'date-fns'
-import React from 'react'
 import styled from 'styled-components'
 
-import {buildImageObj, getColorsFromMainImage} from '../lib/helpers'
+import {buildImageObj, getTheme} from '../lib/helpers'
 import {imageUrlFor} from '../lib/image-url'
 import PortableText from './portableText'
 import Container from './container'
 import AuthorList from './author-list'
 
 const Article = styled.article`
-  color: ${props => props.colors.foregroundColor};
+  color: ${props => props.colors.textColor};
   background: ${props => props.colors.backgroundColor};
   
   .mainImage {
@@ -31,7 +31,7 @@ const Article = styled.article`
   }
 
   .grid {
-    @media (--media-min-medium) {
+    @media (min-width: 675px) {
       display: grid;
       grid-template-columns: 1fr;
       grid-column-gap: 2em;
@@ -48,6 +48,10 @@ const Article = styled.article`
           color: inherit;
         }
       }
+    }
+
+    h1 {
+      color: ${props => props.colors.highlightColor};
     }
 
     h2, h3, h4, h5, h6 {
@@ -94,11 +98,15 @@ const Article = styled.article`
   }
 `
 
-export default function Story ({_rawBody, authors, categories, title, slug, mainImage, publishedAt}) {
-  const url = typeof window !== 'undefined' ? window.location.origin : ''
-  const colorsFromMainImage = getColorsFromMainImage(slug.current, url)
+export default function Story ({_rawBody, authors, categories, colors, setColors, title, mainImage, publishedAt}) {
+  console.log(colors);
+
+  useEffect(() => {
+    setColors(getTheme(categories));
+  }, [])
+
   return (
-    <Article colors={colorsFromMainImage}>
+    <Article colors={colors}>
       {mainImage && mainImage.asset && (
         <div className='mainImage'>
           <img

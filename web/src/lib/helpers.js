@@ -1,13 +1,33 @@
 import {format, isFuture} from 'date-fns'
 import {usePalette} from 'react-palette'
 
-export function getColorsFromMainImage(slug, url) {
-  const palette = usePalette(`${url}/img/${slug}.jpg`)
+export function getTheme(categories) {
+  let storyCategories = []
+  categories.map(category => (
+    storyCategories.push(category.title)
+  ))
+  console.log(storyCategories)
+  console.log(storyCategories.includes("Fear"));
 
-  return ({
-      backgroundColor: palette.data.darkMuted,
-      foregroundColor: palette.data.lightMuted
-    })
+  if (storyCategories.includes("Fear")) {
+    return {
+      textColor: 'rgba(242, 242, 242, 1)',
+      highlightColor: '#dc4800',
+      lightMuted: '',
+      backgroundColor: '#202123',
+      muted: '',
+      vibrant: '',
+    }
+  }
+
+  return {
+    textColor: '#202123',
+    highlightColor: '#dc4800',
+    lightMuted: '',
+    backgroundColor: 'rgba(242, 242, 242, 1)',
+    muted: '',
+    vibrant: '',
+  }
 }
 
 export function cn (...args) {
