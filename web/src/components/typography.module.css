@@ -59,7 +59,7 @@
     line-height: var(--font-base-line-height);
   }
 
-  @media (--media-min-medium) {
+  @media (min-width: 675px) {
     font-size: var(--font-large-size);
     line-height: var(--font-large-line-height);
   }
@@ -80,7 +80,7 @@
     line-height: var(--font-title2-line-height);
   }
 
-  @media (--media-min-medium) {
+  @media (min-width: 675px) {
     font-size: var(--font-title1-size);
     line-height: var(--font-title1-line-height);
   }
@@ -97,7 +97,7 @@
     line-height: var(--font-title3-line-height);
   }
 
-  @media (--media-min-medium) {
+  @media (min-width: 675px) {
     font-size: var(--font-title2-size);
     line-height: var(--font-title2-line-height);
   }
@@ -114,7 +114,7 @@
     line-height: var(--font-large-line-height);
   }
 
-  @media (--media-min-medium) {
+  @media (min-width: 675px) {
     font-size: var(--font-title3-size);
     line-height: var(--font-title3-line-height);
   }
@@ -131,7 +131,7 @@
     line-height: var(--font-base-line-height);
   }
 
-  @media (--media-min-medium) {
+  @media (min-width: 675px) {
     font-size: var(--font-large-size);
     line-height: var(--font-large-line-height);
   }

@@ -29,11 +29,6 @@
   --font-title2-line-height: calc(33 / 24); /* 33px */
   --font-title1-size: calc(49 / var(--unit) * 1rem); /* 49px */
   --font-title1-line-height: calc(57 / 49); /* 57px */
-
-  --media-min-small: (min-width: 450px);
-  --media-max-small: (max-width: 449px);
-  --media-min-medium: (min-width: 675px);
-  --media-min-large: (min-width: 900px);
 }
 
 html {

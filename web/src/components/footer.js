@@ -21,7 +21,7 @@ const StyledFooter = styled.footer`
     padding: 4.5em 1.5em 1.5em;
     margin: 0 auto;
 
-    @media (--media-min-small) {
+    @media (min-width: 450px) {
       padding: 6em 2em 2em;
     }
   }

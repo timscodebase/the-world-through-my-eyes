@@ -13,7 +13,7 @@
   padding: 1em;
   display: flex;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     padding: 1.5em 1.5em;
   }
 }
@@ -51,7 +51,7 @@
     fill: inherit;
   }
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     display: none;
   }
 }
@@ -76,7 +76,7 @@
     }
   }
 
-  @media (--media-max-small) {
+  @media (max-width: 449px) {
     position: absolute;
     background: var(--color-white);
     color: var(--color-black);
@@ -94,7 +94,7 @@
     }
   }
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     display: block;
 
     @nest & ul {

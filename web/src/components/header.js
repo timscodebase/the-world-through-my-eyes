@@ -14,13 +14,14 @@ const Wrapper = styled.div`
   background: ${props => props.colors.backgroundColor};
 
   .wrapper {
+    position: relative;
     box-sizing: border-box;
     margin: 0 auto;
     max-width: 960px;
     padding: 1em;
     display: flex;
 
-    @media (--media-min-small) {
+    @media (min-width: 450px) {
       padding: 1.5em 1.5em;
     }
   }
@@ -58,7 +59,7 @@ const Wrapper = styled.div`
       fill: inherit;
     }
 
-    @media (--media-min-small) {
+    @media (min-width: 450px) {
       display: none;
     }
   }
@@ -68,7 +69,15 @@ const Wrapper = styled.div`
 
     ul {
       margin: 0;
-      padding: 0;
+      padding: 1rem;
+      background: ${props => props.colors.backgroundColor};
+      position: absolute;
+      top: 72px;
+      right: 0px;
+    }
+
+    ul li {
+      list-style: none;
     }
 
     ul li a {
@@ -83,14 +92,12 @@ const Wrapper = styled.div`
       }
     }
 
-    @media (--media-max-small) {
+    @media (min-width: 450px) {
       position: absolute;
-      background: var(--color-white);
-      color: var(--color-black);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
       left: 0;
       right: 0;
-      top: 4.3rem;
+      top: -4rem;
 
       ul {
         padding: 1rem 0;
@@ -101,7 +108,7 @@ const Wrapper = styled.div`
       }
     }
 
-    @media (--media-min-small) {
+    @media (min-width: 450px) {
       display: block;
 
       ul {
