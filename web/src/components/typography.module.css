@@ -1,12 +1,6 @@
 @import '../styles/custom-media.css';
 @import '../styles/custom-properties.css';
 
-
-
-/*
- * Statically sized elements
- */
-
 .title1 {
   font-size: var(--font-title1-size);
   line-height: var(--font-title1-line-height);
@@ -54,7 +48,7 @@
   line-height: var(--font-base-line-height);
   margin: 0.5rem 0 1rem 0;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     font-size: var(--font-base-size);
     line-height: var(--font-base-line-height);
   }
@@ -69,13 +63,30 @@
   background: var(--color-very-light-gray);
 }
 
+.responsiveStoryTitle {
+  font-weight: 600;
+  font-size: var(--font-title1-size);
+  line-height: var(--font-title1-line-height);
+  margin: 1rem 0 2rem;
+
+  @media (min-width: 450px) {
+    font-size: var(--font-title1-size);
+    line-height: var(--font-title-line-height);
+  }
+
+  @media (min-width: 675px) {
+    font-size: var(--font-title1-size);
+    line-height: var(--font-title1-line-height);
+  }
+}
+
 .responsiveTitle1 {
   font-weight: 600;
   font-size: var(--font-title2-size);
   line-height: var(--font-title2-line-height);
   margin: 1rem 0 2rem;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     font-size: var(--font-title2-size);
     line-height: var(--font-title2-line-height);
   }
@@ -92,7 +103,7 @@
   line-height: var(--font-large-line-height);
   margin: 1.5rem 0 0.5rem;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     font-size: var(--font-title3-size);
     line-height: var(--font-title3-line-height);
   }
@@ -109,7 +120,7 @@
   line-height: var(--font-large-line-height);
   margin: 1rem 0 0.5rem;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     font-size: var(--font-large-size);
     line-height: var(--font-large-line-height);
   }
@@ -126,7 +137,7 @@
   line-height: var(--font-base-line-height);
   margin: 1rem 0 0.5rem;
 
-  @media (--media-min-small) {
+  @media (min-width: 450px) {
     font-size: var(--font-base-size);
     line-height: var(--font-base-line-height);
   }

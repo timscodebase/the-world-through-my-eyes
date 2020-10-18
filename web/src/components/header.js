@@ -6,8 +6,6 @@ import Icon from './icon'
 import {cn} from '../lib/helpers'
 
 import styles from './header.module.css'
-import '../styles/custom-media.css';
-import '../styles/custom-properties.css';
 
 const Wrapper = styled.div`
   color: ${props => props.colors.textColor};

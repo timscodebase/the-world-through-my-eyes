@@ -2,7 +2,7 @@ import {Link} from 'gatsby'
 import React from 'react'
 import StoryPreview from './story-preview'
 
-import styles from './blog-post-preview-list.module.css'
+import styles from './story-preview-list.module.css'
 
 function StoryPreviewGrid (props) {
   return (

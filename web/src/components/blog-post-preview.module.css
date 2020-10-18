@@ -10,7 +10,7 @@
 .inList {
   composes: root;
 
-  @media (min-width: 675px) {
+  @media (--media-min-medium) {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 2em;
@@ -47,7 +47,7 @@
     }
   }
 
-  @media (min-width: 675px) {
+  @media (--media-min-medium) {
     @nest .inList & {
       margin-top: 0;
     }
