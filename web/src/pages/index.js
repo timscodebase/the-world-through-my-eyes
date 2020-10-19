@@ -1,17 +1,18 @@
-import React from 'react'
-import {graphql} from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from '../lib/helpers'
-import BlogPostPreviewList from '../components/blog-post-preview-list'
-import StoryPreviewList from '../components/story-preview-list'
-import Container from '../components/container'
-import GraphQLErrorList from '../components/graphql-error-list'
-import SEO from '../components/seo'
-import Layout from '../containers/layout'
+  filterOutDocsPublishedInTheFuture,
+} from '../lib/helpers';
+import BlogPostPreviewList from '../components/blog-post-preview-list';
+import StoryPreviewList from '../components/story-preview-list';
+import Container from '../components/container';
+import GraphQLErrorList from '../components/graphql-error-list';
+import SEO from '../components/seo';
+import Layout from '../containers/layout';
+import { ThemeProvider } from '../context/themeContext';
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -37,7 +38,9 @@ export const query = graphql`
   }
 
   query IndexPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+    site: sanitySiteSettings(
+      _id: { regex: "/(drafts.|)siteSettings/" }
+    ) {
       title
       subTitle
       description
@@ -46,7 +49,10 @@ export const query = graphql`
     posts: allSanityPost(
       limit: 6
       sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      filter: {
+        slug: { current: { ne: null } }
+        publishedAt: { ne: null }
+      }
     ) {
       edges {
         node {
@@ -63,11 +69,14 @@ export const query = graphql`
           }
         }
       }
-    },
+    }
     stories: allSanityStory(
       limit: 6
       sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      filter: {
+        slug: { current: { ne: null } }
+        publishedAt: { ne: null }
+      }
     ) {
       edges {
         node {
@@ -86,35 +95,35 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 const IndexPage = props => {
-  const {data, errors} = props
+  const { data, errors } = props;
 
   if (errors) {
     return (
       <Layout>
         <GraphQLErrorList errors={errors} />
       </Layout>
-    )
+    );
   }
 
-  const site = (data || {}).site
+  const site = (data || {}).site;
   const postNodes = (data || {}).posts
     ? mapEdgesToNodes(data.posts)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
+        .filter(filterOutDocsWithoutSlugs)
+        .filter(filterOutDocsPublishedInTheFuture)
+    : [];
   const storyNodes = (data || {}).stories
     ? mapEdgesToNodes(data.stories)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
+        .filter(filterOutDocsWithoutSlugs)
+        .filter(filterOutDocsPublishedInTheFuture)
+    : [];
 
   if (!site) {
     throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    )
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
+    );
   }
 
   return (
@@ -124,26 +133,28 @@ const IndexPage = props => {
         description={site.description}
         keywords={site.keywords}
       />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        <h2>{site.subTitle}</h2>
-        {storyNodes && (
-          <StoryPreviewList
-            title='Latest blog stories'
-            nodes={storyNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-        {postNodes && (
-          <BlogPostPreviewList
-            title='Latest blog posts'
-            nodes={postNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-      </Container>
+      <ThemeProvider>
+        <Container>
+          <h1 hidden>Welcome to {site.title}</h1>
+          <h2>{site.subTitle}</h2>
+          {storyNodes && (
+            <StoryPreviewList
+              title="Latest blog stories"
+              nodes={storyNodes}
+              browseMoreHref="/archive/"
+            />
+          )}
+          {postNodes && (
+            <BlogPostPreviewList
+              title="Latest blog posts"
+              nodes={postNodes}
+              browseMoreHref="/archive/"
+            />
+          )}
+        </Container>
+      </ThemeProvider>
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;

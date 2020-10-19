@@ -1,11 +1,13 @@
-import {Link} from 'gatsby'
-import React from 'react'
-import styled from 'styled-components'
+import { Link } from 'gatsby';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 
-import Icon from './icon'
-import {cn} from '../lib/helpers'
+import { ThemeContext } from '../context/themeContext';
 
-import styles from './header.module.css'
+import Icon from './icon';
+import { cn } from '../lib/helpers';
+
+import styles from './header.module.css';
 
 const Wrapper = styled.div`
   color: ${props => props.colors.textColor};
@@ -124,31 +126,61 @@ const Wrapper = styled.div`
   .showNav {
     display: block;
   }
-`
+`;
 
-const Header = ({colors, onHideNav, onShowNav, showNav, siteTitle}) => (
-  
+const Header = ({
+  colors,
+  onHideNav,
+  onShowNav,
+  showNav,
+  siteTitle,
+}) => {
+  const { theme, toggle, dark } = useContext(ThemeContext);
+  console.log({ theme, toggle, dark });
+
+  function hiBob() {
+    alert('Hi, Bob');
+  }
+  console.log(toggle);
+
+  return (
     <div className={styles.root}>
       <Wrapper colors={colors}>
         <div className="wrapper">
-        <div className="branding">
-          <Link to='/'>{siteTitle}</Link>
-        </div>
+          <div className="branding">
+            <Link to="/">{siteTitle}</Link>
+          </div>
 
-        <button className="toggleNavButton" onClick={showNav ? onHideNav : onShowNav}>
-          <Icon symbol='hamburger' />
-        </button>
+          <button
+            onClick={hiBob}
+            style={{
+              marginRight: '3rem',
+              backgroundColor: theme.backgroundColor,
+              color: theme.color,
+              outline: 'none',
+            }}
+          >
+            Toggle to {!dark ? 'Dark' : 'Light'} theme
+          </button>
 
-        <nav className={cn(`nav`, showNav && `showNav`)}>
-          <ul>
-            <li>
-              <Link to='/archive/'>Archive</Link>
-            </li>
-          </ul>
-        </nav>
+          <button
+            className="toggleNavButton"
+            onClick={showNav ? onHideNav : onShowNav}
+          >
+            <Icon symbol="hamburger" />
+          </button>
+
+          <nav className={cn(`nav`, showNav && `showNav`)}>
+            <ul>
+              <li>
+                <Link to="/archive/">Archive</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </Wrapper>
     </div>
-)
+  );
+};
 
-export default Header
+export default Header;
