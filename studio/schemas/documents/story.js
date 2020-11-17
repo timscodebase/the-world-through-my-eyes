@@ -1,9 +1,11 @@
-import {format} from 'date-fns'
+import { format } from 'date-fns'
+import { FaBook } from 'react-icons'
 
 export default {
   name: 'story',
   type: 'document',
   title: 'Story',
+  icon: FaBook,
   fields: [
     {
       name: 'title',
@@ -105,7 +107,7 @@ export default {
       slug: 'slug',
       media: 'mainImage'
     },
-    prepare ({title = 'No title', publishedAt, slug = {}, media}) {
+    prepare({ title = 'No title', publishedAt, slug = {}, media }) {
       const dateSegment = format(publishedAt, 'YYYY/MM')
       const path = `/${dateSegment}/${slug.current}/`
       return {

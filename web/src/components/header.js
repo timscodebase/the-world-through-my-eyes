@@ -135,13 +135,8 @@ const Header = ({
   showNav,
   siteTitle,
 }) => {
-  const { theme, toggle, dark } = useContext(ThemeContext);
-  console.log({ theme, toggle, dark });
-
-  function hiBob() {
-    alert('Hi, Bob');
-  }
-  console.log(toggle);
+  const { dark, toggle } = useContext(ThemeContext);
+  console.log({ toggle, dark });
 
   return (
     <div className={styles.root}>
@@ -152,15 +147,14 @@ const Header = ({
           </div>
 
           <button
-            onClick={hiBob}
+            className="dark-switcher"
             style={{
+              padding: '0 0.75rem 0 1rem',
               marginRight: '3rem',
-              backgroundColor: theme.backgroundColor,
-              color: theme.color,
-              outline: 'none',
             }}
+            onClick={toggle}
           >
-            Toggle to {!dark ? 'Dark' : 'Light'} theme
+            {dark ? <span>☀</span> : <span>☾</span>}
           </button>
 
           <button

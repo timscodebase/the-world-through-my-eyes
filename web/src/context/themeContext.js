@@ -2,14 +2,12 @@ import React from 'react';
 
 const themes = {
   dark: {
-    backgroundColor: '#202123',
-    color: 'rgba(242, 242, 242, 1)',
-    highlight: '#156dff',
+    backgroundColor: 'black',
+    color: 'white',
   },
   light: {
-    backgroundColor: 'rgba(242, 242, 242, 1)',
-    color: '#202123',
-    highlight: '#156dff',
+    backgroundColor: 'white',
+    color: 'black',
   },
 };
 
@@ -29,12 +27,12 @@ function ThemeProvider({ children }) {
     setDark(isDark);
   }, [dark]);
   // To toggle between dark and light modes
-  function toggle() {
+  const toggle = () => {
     alert('worked');
     const isDark = !dark;
     localStorage.setItem('dark', JSON.stringify(isDark));
     setDark(isDark);
-  }
+  };
 
   const theme = dark ? themes.dark : themes.light;
 

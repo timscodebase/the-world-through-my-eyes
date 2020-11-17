@@ -1,9 +1,11 @@
 import { format } from 'date-fns'
+import { GiDramaMasks } from 'react-icons'
 
 export default {
   name: 'poem',
   type: 'document',
   title: 'Poem',
+  icon: GiDramaMasks,
   fields: [
     {
       name: 'title',
